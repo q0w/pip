@@ -8,7 +8,8 @@ from pip._internal import wheel_builder
 from pip._internal.models.link import Link
 from pip._internal.operations.build.wheel_legacy import format_command_result
 from pip._internal.req.req_install import InstallRequirement
-from tests.lib import PipTestEnvironment, _create_test_package
+from pip._internal.vcs.git import Git
+from tests.lib import Path, _create_test_package
 
 
 @pytest.mark.parametrize(
@@ -172,9 +173,9 @@ def test_should_cache(req: ReqMock, expected: bool) -> None:
     assert wheel_builder._should_cache(cast(InstallRequirement, req)) is expected
 
 
-def test_should_cache_git_sha(script: PipTestEnvironment) -> None:
-    repo_path = _create_test_package(script, name="mypkg")
-    commit = script.run("git", "rev-parse", "HEAD", cwd=repo_path).stdout.strip()
+def test_should_cache_git_sha(tmpdir: Path) -> None:
+    repo_path = _create_test_package(tmpdir, name="mypkg")
+    commit = Git.get_revision(repo_path)
 
     # a link referencing a sha should be cached
     url = "git+https://g.c/o/r@" + commit + "#egg=mypkg"
