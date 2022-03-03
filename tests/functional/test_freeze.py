@@ -344,7 +344,7 @@ def test_freeze_git_clone_srcdir(script: PipTestEnvironment) -> None:
     relative to setup.py.
     """
     # Returns path to a generated package called "version_pkg"
-    pkg_version = _create_test_package_with_srcdir(script)
+    pkg_version = _create_test_package_with_srcdir(script.scratch_path)
 
     result = script.run(
         "git",
@@ -379,7 +379,7 @@ def test_freeze_mercurial_clone_srcdir(script: PipTestEnvironment) -> None:
     relative to setup.py.
     """
     # Returns path to a generated package called "version_pkg"
-    pkg_version = _create_test_package_with_srcdir(script, vcs="hg")
+    pkg_version = _create_test_package_with_srcdir(script.scratch_path, vcs="hg")
 
     result = script.run("hg", "clone", pkg_version, "pip-test-package")
     repo_dir = script.scratch_path / "pip-test-package"

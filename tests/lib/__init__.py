@@ -977,10 +977,10 @@ def _create_test_package_with_subdirectory(
 
 
 def _create_test_package_with_srcdir(
-    location: Path, name: str = "version_pkg", vcs: str = "git"
+    dir_path: Path, name: str = "version_pkg", vcs: str = "git"
 ) -> Path:
-    location.joinpath(name).mkdir()
-    version_pkg_path = location / name
+    dir_path.joinpath(name).mkdir()
+    version_pkg_path = dir_path / name
     subdir_path = version_pkg_path.joinpath("subdir")
     subdir_path.mkdir()
     src_path = subdir_path.joinpath("src")
@@ -1003,7 +1003,7 @@ def _create_test_package_with_srcdir(
             )
         )
     )
-    return _vcs_add(location, version_pkg_path, vcs)
+    return _vcs_add(dir_path, version_pkg_path, vcs)
 
 
 def _create_test_package(
