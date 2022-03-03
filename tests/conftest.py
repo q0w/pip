@@ -116,7 +116,7 @@ def pytest_collection_modifyitems(config: Config, items: List[pytest.Item]) -> N
 
             # We don't want to allow using the script resource if this is a
             # unit test, as unit tests should not need all that heavy lifting
-            if set(getattr(item, "funcargnames", [])) & {"script"}:
+            if set(getattr(item, "fixturenames", [])) & {"script"}:
                 raise RuntimeError(
                     "Cannot use the ``script`` funcarg in a unit test: "
                     "(filename = {}, item = {})".format(module_path, item)
