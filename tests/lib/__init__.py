@@ -1038,7 +1038,6 @@ def _create_svn_repo(repo_path: Path, version_pkg_path: str) -> str:
     )
     Subversion.run_command(
         make_command(
-            "svn",
             "import",
             version_pkg_path,
             repo_url,
