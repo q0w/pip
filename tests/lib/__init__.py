@@ -1033,9 +1033,7 @@ def _create_test_package(
 
 def _create_svn_repo(repo_path: Path, version_pkg_path: str) -> str:
     repo_url = path_to_url(repo_path / "pip-test-package-repo" / "trunk")
-    Subversion.run_command(
-        make_command("svnadmin", "create", "pip-test-package-repo"), cwd=repo_path
-    )
+    subprocess.check_call("svnadmin create pip-test-package-repo", cwd=repo_path)
     Subversion.run_command(
         make_command(
             "svn",
