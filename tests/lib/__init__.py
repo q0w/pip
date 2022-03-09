@@ -897,7 +897,7 @@ def _vcs_add(location: Path, version_pkg_path: Path, vcs: str = "git") -> Path:
     elif vcs == "svn":
         repo_url = _create_svn_repo(location, version_pkg_path)
         Subversion.run_command(
-            make_command("svn", "checkout", repo_url, "pip-test-package"), cwd=location
+            make_command("checkout", repo_url, "pip-test-package"), cwd=location
         )
         checkout_path: str = location / "pip-test-package"
 
