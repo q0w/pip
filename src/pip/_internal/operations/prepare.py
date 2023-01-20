@@ -338,7 +338,7 @@ class RequirementPreparer:
         # a surprising hash mismatch in the future.
         # file:/// URLs aren't pinnable, so don't complain about them
         # not being pinned.
-        if req.original_link is None and not req.is_pinned:
+        if (req.original_link is None or req.link is None) and not req.is_pinned:
             raise HashUnpinned()
 
         # If known-good hashes are missing for this requirement,
